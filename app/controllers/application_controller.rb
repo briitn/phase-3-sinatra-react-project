@@ -38,7 +38,7 @@ end
 get '/pictures' do
   picture=Picture.all
   picture.to_json
-en
+end
 
 patch '/likes' do
   picture=Picture.find(params[:id])
@@ -46,5 +46,5 @@ patch '/likes' do
   liked_by: params[:liked_by]
   )
   picture.to_json
-end
+en
 end
