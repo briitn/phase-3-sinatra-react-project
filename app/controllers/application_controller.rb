@@ -46,5 +46,5 @@ patch '/likes' do
   liked_by: params[:liked_by]
   )
   picture.to_json
-en
+end
 end
