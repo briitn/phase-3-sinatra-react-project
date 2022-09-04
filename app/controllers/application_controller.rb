@@ -40,11 +40,4 @@ get '/pictures' do
   picture.to_json
 end
 
-patch '/likes' do
-  picture=Picture.find(params[:id])
-  picture.update(likes: params[:count],
-  liked_by: params[:liked_by]
-  )
-  picture.to_json
-end
-end
+
