@@ -31,13 +31,13 @@ post '/upload' do
     picture.to_json
 end
 
-get '/pictures/:id' do
-  picture= User.find(params[:id])
-  picture.to_json(include: :pictures)
-end
-get '/pictures' do
-  picture=Picture.all
+
+
+patch '/likes' do
+  picture=Picture.find(params[:id])
+  picture.update(likes: params[:count],
+  liked_by: params[:liked_by]
+  )
   picture.to_json
 end
-
-
+end
