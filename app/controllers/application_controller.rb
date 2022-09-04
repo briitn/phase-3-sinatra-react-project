@@ -34,11 +34,11 @@ end
 get '/pictures/:id' do
   picture= User.find(params[:id])
   picture.to_json(include: :pictures)
-en
+end
 get '/pictures' do
   picture=Picture.all
   picture.to_json
-end
+en
 
 patch '/likes' do
   picture=Picture.find(params[:id])
