@@ -29,7 +29,7 @@ post '/upload' do
     username: params[:user],
     likes: params[:count])
     picture.to_json
-end
+en
 
 get '/pictures/:id' do
   picture= User.find(params[:id])
