@@ -22,6 +22,13 @@ get '/' do
 
 end
 
+post '/upload' do
+  picture=Picture.create(
+    link: params[:image],
+    user_id: params[:id],
+    username: params[:user],
+    likes: params[:count])
+    picture.to_json
 
 
 get '/pictures/:id' do
