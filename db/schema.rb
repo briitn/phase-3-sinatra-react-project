@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_05_030514) do
+ActiveRecord::Schema.define(version: 2022_11_08_152456) do
 
   create_table "follows", force: :cascade do |t|
     t.integer "user_id"
@@ -21,7 +21,6 @@ ActiveRecord::Schema.define(version: 2022_08_05_030514) do
   create_table "pictures", force: :cascade do |t|
     t.string "link"
     t.integer "user_id"
-    t.string "username"
     t.integer "likes"
     t.string "liked_by"
   end

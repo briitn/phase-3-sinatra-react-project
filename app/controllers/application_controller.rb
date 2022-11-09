@@ -2,7 +2,7 @@ class ApplicationController < Sinatra::Base
   set :default_content_type, 'application/json'
   
   # Add your routes here
-post '/create' do
+post '/users' do
   user = User.create(
     username: params[:username],
     password: params[:password],
@@ -11,39 +11,37 @@ post '/create' do
   user.to_json
 end
 
-get '/sign_in/:username' do
-  user= User.find (params[:username]
-)
-user.to_json
+get '/users/:id' do
+  user= User.find (params[:id])
+  user.to_json(include: :pictures)
 end
+
 get '/' do 
   user= User.all
   user.to_json
 
 end
 
-post '/upload' do
+post '/pictures' do
   picture=Picture.create(
     link: params[:image],
     user_id: params[:id],
-    username: params[:user],
+    
     likes: params[:count])
     picture.to_json
 
-
-get '/pictures/:id' do
-  picture= User.find(params[:id])
-  picture.to_json(include: :pictures)
 end
+
 get '/pictures' do
   picture=Picture.all
-  picture.to_json
+  
+ picture.to_json(include: :user)
 end
 
-patch '/likes' do
+patch '/pictures/:id' do
   picture=Picture.find(params[:id])
-  picture.update(likes: params[:count],
-  liked_by: params[:liked_by]
+  picture.update(likes: params[:likes]
+  
   )
   picture.to_json
 end
