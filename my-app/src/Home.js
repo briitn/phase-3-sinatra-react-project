@@ -32,7 +32,7 @@ function changeSubmit(e){
     }
      else {   history.push('/pictures')
        setId(res.id)
-       console.log(res)
+    
        setPicture(res.profile_pic)
 }
 
