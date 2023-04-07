@@ -12,37 +12,58 @@ post '/users' do
 end
 
 get '/users/:id' do
-  user= User.find (params[:id])
-  user.to_json(include: :pictures)
+  user= Picture.where(user_id:params[:id])
+  user.to_json(include: :user)
 end
 
-get '/' do 
+get '/users' do 
   user= User.all
-  user.to_json
+  user.to_json(include: :pictures)
 
 end
+post '/login' do 
+  user= User.find_by(username: params[:username])
+  if user&&user.password===params[:password]
+     
 
+    user.to_json(include: :pictures)
+  else
+       {errors: ["Invalid username or password"]}.to_json
+  end
+end
 post '/pictures' do
   picture=Picture.create(
     link: params[:image],
     user_id: params[:id],
-    
-    likes: params[:count])
-    picture.to_json
+   likes:0)
+    picture.to_json(include: :user)
 
 end
 
 get '/pictures' do
-  picture=Picture.all
+  pictures=Picture.all
   
- picture.to_json(include: :user)
+ pictures.to_json(include: :user)
 end
 
-patch '/pictures/:id' do
+post '/posts/' do
+
   picture=Picture.find(params[:id])
-  picture.update(likes: params[:likes]
+  picture.update(likes: picture.likes+1
   
   )
-  picture.to_json
+  pictures=Picture.all
+  
+  pictures.to_json(include: :user)
+  pictures.to_json(include: :user)
 end
+
+delete '/pictures/:id' do
+
+  picture=Picture.find(params[:id])
+picture.destroy
+pictures=Picture.all
+pictures.to_json(include: :user)
+end
+
 end
